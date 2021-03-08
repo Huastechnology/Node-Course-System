@@ -15,8 +15,8 @@ async function saveUser(req, res) {
       }else{
         res.status(201).send({
           userAdded,
-          msg: 'The user was added succesfuly!',
-          code: 201
+          "msg": 'The user was added succesfuly!',
+          "code": 201
         })
       }
     })
