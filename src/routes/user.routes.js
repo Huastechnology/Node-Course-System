@@ -1,7 +1,9 @@
 const { Router } = require('express')
-const AA = Router()
+const api = Router()
 const userController = require('../controller/user.controller')
 
-AA.post('/user', userController.saveUser)
+api.post('/user', userController.saveUser)
+api.get('/user', userController.getAllUsers)
+api.get('/user/:matchUser',userController.getMatchUser)
 
-module.exports = AA;
+module.exports = api;
