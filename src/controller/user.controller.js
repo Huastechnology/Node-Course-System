@@ -6,6 +6,7 @@ async function saveUser(req, res) {
   user.phone = req.body.phone
   user.email = req.body.email
   user.password = req.body.password
+  user.role = req.body.role
 
   try{
     await user.save((error, userAdded) => {
