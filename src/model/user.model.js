@@ -4,23 +4,23 @@ const Schema = mongo.Schema
 const User = Schema({
   completeName: {
     type: String,
-    require: true
+    required: [true, 'The fullname is required!']
   },
   phone: {
-    type: Number,
-    require: true
+    type: String,
+    required: [true, 'The phone number is required!']
   },
   email: {
     type: String,
-    require: true
+    required: [true, 'The E-mail is required!']
   },
   password: {
     type: String,
-    require: true
+    required: [true, 'The password is required!']
   },
   role: {
     type: String,
-    require: true
+    default: 'teacher'
   }
 }, {
   timestamps: true
