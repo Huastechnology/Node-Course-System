@@ -1,6 +1,7 @@
 const userSchema = require('../model/user.model')
 const encrypt = require('../utils/encrypt')
-const matchPassword = require('../utils/matchPassword')
+const {matchPassword} = require('../utils/matchPassword')
+const generateToken = require('../utils/generateToken')
 
 async function saveUser(req, res) {
   try{
@@ -30,10 +31,29 @@ async function saveUser(req, res) {
 
 async function logIn(req, res) {
   try {
+    let message, status
     const params = req.body
-    const matchPass = matchPassword(params.password)
-  } catch(err) {
+    const user = await userSchema.findOne({email: params.email})
+    if(!user) {
+      status = 404
+      message = 'User not found'
+      res.status(status).send(message)
+    } else {
+      const matchPass = await matchPassword(params.password, user.password)
+      if(!matchPass) {
+        status = 401
+        message = 'Error en las credenciales'
+        res.status(status).send(message)
+      } 
+      
+      const token = generateToken(params)
+      message = {message:'access success',token:token}
+      status = 200 
+      res.status(status).send(message)
+    }
 
+  } catch(err) {
+    res.status(500).send({message: err.message})
   }
 }
 async function getAllUsers(req,res){
