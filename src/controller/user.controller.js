@@ -36,8 +36,31 @@ async function logIn(req, res) {
 
   }
 }
+async function getAllUsers(req,res){
+    try {
+      const users = await userSchema.find()
+      if(!users){
+        res.status(200).send({message:'users not found'})
+      }
+      res.status(200).send({msg:users})
+    } catch (e) {
+      res.status(500).send({message: e.message})
+    }
+}
+
+async function getMatchUser(req,res){
+   try {
+     let matchUser = req.params.matchUser
+     let user = await userSchema.find({completeName:{$regex:new RegExp(matchUser, 'i')}},{password:false})
+     res.status(200).send({matchuser: user})
+   } catch (e) {
+     res.status(500).send({message: e.message})
+   }
+}
 
 module.exports = {
   saveUser,
+  getAllUsers,
+  getMatchUser,
   logIn
 }
