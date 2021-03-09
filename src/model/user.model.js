@@ -7,7 +7,8 @@ const User = Schema({
     required: [true, 'The fullname is required!']
   },
   phone: {
-    type: String,
+    type: Number,
+    maxlength: [10, 'Out of range!'],
     required: [true, 'The phone number is required!']
   },
   email: {
