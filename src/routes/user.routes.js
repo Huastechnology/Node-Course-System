@@ -9,5 +9,6 @@ api.post('/user', verifyRole, verifyEmptyFields, verifyDuplicatesEmails, userCon
 api.post('/logIn', userController.logIn)
 api.get('/user', userController.getAllUsers)
 api.get('/user/:matchUser',userController.getMatchUser)
+api.delete('/user/:userId', userController.deleteUser)
 
 module.exports = api;
