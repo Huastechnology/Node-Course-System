@@ -77,9 +77,29 @@ async function getMatchUser(req,res){
    }
 }
 
+async function deleteUser (req, res) {
+  try {
+    let accountDeleted = await userSchema.findOneAndDelete({_id:req.params.userId})  
+    if(!accountDeleted){
+      res.status(404).json({
+        msg:'The account doesnt exist'
+      })
+    }else{
+      res.status(200).send({
+        msg:'Account deleted successfully',
+        user:accountDeleted
+      })
+    }      
+  }catch (error){
+    console.log(error);
+    res.status(500).send({msg: error.msg})
+  } 
+}
+
 module.exports = {
   saveUser,
   getAllUsers,
   getMatchUser,
-  logIn
+  logIn,
+  deleteUser
 }
