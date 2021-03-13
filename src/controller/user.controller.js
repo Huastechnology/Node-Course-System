@@ -96,10 +96,33 @@ async function deleteUser (req, res) {
   } 
 }
 
+async function updateUserData(req, res) {
+  let userId = req.params.userId
+  let updateData = req.body
+  
+  try {
+    let dataUpdated = await userSchema.findOneAndUpdate({ _id: userId}, updateData )
+
+    if(!dataUpdated){
+      res.status(404).send({msg:'user not found', user:dataUpdated})
+    }else{
+      res.status(200).send({
+        msg:'User Data Updated Successfully',
+        userData: dataUpdated
+      })
+    }
+
+  } catch (e) {
+    console.log(e)
+    res.status(500).send({msg:e.msg})
+  }
+}
+
 module.exports = {
   saveUser,
   getAllUsers,
   getMatchUser,
   logIn,
-  deleteUser
+  deleteUser,
+  updateUserData
 }
