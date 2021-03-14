@@ -10,5 +10,6 @@ api.post('/logIn', userController.logIn)
 api.get('/user', userController.getAllUsers)
 api.get('/user/:matchUser',userController.getMatchUser)
 api.delete('/user/:userId', userController.deleteUser)
+api.put('/user/:userId',userController.updateUserData)
 
 module.exports = api;
