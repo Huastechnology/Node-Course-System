@@ -5,8 +5,8 @@ const middlewares = require('../middlewares/index')
 
 api.post('/user',middlewares.verifyRole, middlewares.verifyEmptyFields, middlewares.verifyDuplicatesEmails, userController.saveUser)
 api.post('/logIn', userController.logIn)
-api.get('/user', userController.getAllUsers)
-api.get('/user/:matchUser',userController.getMatchUser)
+api.get('/user', middlewares.verifyAuth, userController.getAllUsers)
+api.get('/user/:matchUser', middlewares.verifyAuth ,userController.getMatchUser)
 api.delete('/user/:userId', userController.deleteUser)
 api.put('/user/:userId?', middlewares.verifyAuth ,middlewares.verifyId, userController.updateUserData)
 
