@@ -8,6 +8,6 @@ api.post('/logIn', userController.logIn)
 api.get('/user', userController.getAllUsers)
 api.get('/user/:matchUser',userController.getMatchUser)
 api.delete('/user/:userId', userController.deleteUser)
-api.put('/user/:userId?', middlewares.verifyId, userController.updateUserData)
+api.put('/user/:userId?', middlewares.verifyAuth ,middlewares.verifyId, userController.updateUserData)
 
 module.exports = api;
