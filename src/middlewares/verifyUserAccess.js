@@ -10,7 +10,6 @@ const veridyAccess = (req, res, next) => {
     userSchema.findOne({email: decode.data.email}, (err, user) => {
       try{
         if(user.role === 'admin') {
-          console.log('eres admin crack');
           next()
         }if(user._id == id){
           next()
