@@ -11,7 +11,7 @@ const veridyAccess = (req, res, next) => {
       try{
         if(user.role === 'admin') {
           next()
-        }if(user._id == id){
+        }else if(user._id == id){
           next()
         }else{
           res.status(403).send({msg:'You can´t edit another account if it´s not yours'})
