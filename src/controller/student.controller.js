@@ -20,6 +20,28 @@ async function saveStudent(req, res) {
     }
 }
 
+async function getStudents(req, res) {
+    try {
+        let matchStudent = req.params.matchStudent
+        let student = await studentSchema.find({name:{$regex:new RegExp(matchStudent, 'i')}},{password:false})
+        res.status(200).send({matchStudent: student})
+    } catch (e) {
+        res.status(500).send({message: e.message})
+    }
+}
+
+async function getStudentsById(req, res) {
+    try {
+        let id = req.params.userId
+        let student = await studentSchema.find({_id:id},{password:false})
+        res.status(200).send({id: student})
+    } catch (e) {
+        res.status(500).send({message: e.message})
+    }
+}
+
 module.exports = {
-    saveStudent
+    saveStudent,
+    getStudents,
+    getStudentsById
 }
