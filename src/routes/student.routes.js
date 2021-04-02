@@ -1,8 +1,10 @@
 const { Router } = require('express')
 const api = Router()
-const { saveStudent } = require('../controller/student.controller')
-const { verifyDuplicatesEmails } = require('../middlewares')
+const { saveStudent, getStudents, getStudentsById } = require('../controller/student.controller')
+const { verifyDuplicatesEmails, verifyId, verifyAuth } = require('../middlewares')
 
-api.post('/student', verifyDuplicatesEmails, saveStudent)
+api.post('/student', verifyAuth, verifyDuplicatesEmails, saveStudent)
+api.get('/student/:matchStudent?', verifyAuth, getStudents)
+api.get('/student/Id/:userId', verifyAuth, verifyId, getStudentsById)
 
 module.exports = api
