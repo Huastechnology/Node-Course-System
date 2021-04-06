@@ -40,8 +40,28 @@ async function getStudentsById(req, res) {
     }
 }
 
+async function updateStudentInfo(req, res){
+   let userId = req.params.userId
+   let updateData = req.body
+   try{
+       let dataUpdated = await studentSchema.findOneAndUpdate({_id: userId}, updateData)
+       if(!dataUpdated){
+           res.status(404).send({msg:'student not found!',student: dataUpdated})
+       }else{
+           res.status(200).send({
+               msg: 'student data updated successfully!',
+               studentData: dataUpdated
+           })
+       }
+
+   }catch(e){
+       res.status(500).send({message: e.message})
+   }
+}
+
 module.exports = {
     saveStudent,
     getStudents,
-    getStudentsById
+    getStudentsById,
+    updateStudentInfo
 }
