@@ -7,6 +7,6 @@ api.post('/student', verifyAuth, saveStudent)
 api.get('/student/:matchStudent?', verifyAuth, getStudents)
 api.get('/student/Id/:userId', verifyAuth, verifyId, getStudentsById)
 api.put('/student/Id/:userId', verifyAuth, verifyId, updateStudentInfo )
-api.delete('/student/:userId', verifyAuth, deleteStudent)
+api.delete('/student/:userId', verifyAuth, verifyId,deleteStudent)
 
 module.exports = api
