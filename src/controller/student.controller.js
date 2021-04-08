@@ -59,9 +59,29 @@ async function updateStudentInfo(req, res){
    }
 }
 
+async function deleteStudent(req, res){
+    try{
+        let studentDeleted = await studentSchema.findOneAndDelete({_id: req.params.userId})
+        if(!studentDeleted){
+            res.status(404).send({
+                message: 'Student not found'
+            })
+        }else {
+            res.status(200).send({
+                message: 'Student info deleted successfully'/* ,
+                student: studentDeleted */
+            })
+        }
+    }catch(error){
+        console.log(error);
+        res.status(500).send({message: error.message})
+    }
+}
+
 module.exports = {
     saveStudent,
     getStudents,
     getStudentsById,
-    updateStudentInfo
+    updateStudentInfo,
+    deleteStudent
 }
