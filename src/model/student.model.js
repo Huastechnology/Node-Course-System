@@ -21,9 +21,8 @@ const Student = Schema({
         default: null
     },
     course: {
-        type: Schema.ObjectId,
-        ref: 'courses',
-        //required: true
+        type: Array,
+        default: null
     }
 })
 
