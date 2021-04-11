@@ -1,4 +1,3 @@
-const e = require('express')
 const courseSchema = require('../model/course.model')
 
 async function saveCourse(req, res) {
