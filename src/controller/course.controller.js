@@ -1,3 +1,4 @@
+const e = require('express')
 const courseSchema = require('../model/course.model')
 
 async function saveCourse(req, res) {
@@ -15,11 +16,33 @@ async function saveCourse(req, res) {
                 })
             }
         })    
-    } catch(error) {
-        throw error
+    } catch(e) {
+        res.status(500).send({message: e.message})
+    }
+}
+
+async function getCourses(req,res){
+    try {
+        let matchCourse = req.params.matchCourse
+        let courses = await courseSchema.find({courseName:{$regex:new RegExp(matchCourse,'i')}})
+        res.status(200).send({matchCourse: courses})
+    } catch (e) {
+        res.status(500).send({message: e.message})
+    }
+}
+
+async function getCourseById(req,res){
+    try {
+        let id = req.params.courseId
+        let course = await courseSchema.find({_id:id})
+        res.status(200).send({item:course})
+    } catch (e) {
+        res.status(500).send({message: e.message})
     }
 }
 
 module.exports = {
-    saveCourse
+    saveCourse,
+    getCourses,
+    getCourseById
 }
