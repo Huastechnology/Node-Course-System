@@ -5,6 +5,6 @@ const { verifyAuth, verifyId } = require('../middlewares')
 
 api.post('/course', verifyAuth, saveCourse)
 api.get('/course/:matchCourse',verifyAuth,getCourses)
-api.get('/course/id/:courseId',verifyAuth,getCourseById)
+api.get('/course/id/:courseId',verifyAuth,verifyId,getCourseById)
 
 module.exports = api
