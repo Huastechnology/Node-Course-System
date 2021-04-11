@@ -32,7 +32,7 @@ async function getCourses(req,res){
 
 async function getCourseById(req,res){
     try {
-        let id = req.params.courseId
+        let id = req.params.userId
         let course = await courseSchema.find({_id:id})
         res.status(200).send({item:course})
     } catch (e) {
@@ -40,8 +40,32 @@ async function getCourseById(req,res){
     }
 }
 
+async function updateCourseInfo(req, res) {
+    try {
+        let course_id = req.params.userId
+        let new_data = req.body
+
+        let data_updated = await courseSchema.findOneAndUpdate({_id: course_id}, new_data)
+
+        if(!data_updated) {
+            throw new Error('Error updating course data')
+        } else {
+            res.status(200).send({
+                msg: 'Course data updated successfully!',
+                courseData: new_data
+            })
+        }
+
+    } catch(err) {
+        res.status(500).send({message: err.message})
+    }
+
+
+}
+
 module.exports = {
     saveCourse,
     getCourses,
-    getCourseById
+    getCourseById,
+    updateCourseInfo
 }
