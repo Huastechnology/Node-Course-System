@@ -63,9 +63,25 @@ async function updateCourseInfo(req, res) {
 
 }
 
+async function deleteCourse(req,res){
+    try{
+        /* we need to change userId variable param to simple variable */
+        let courseDeleted = await courseSchema.findOneAndDelete({_id:req.params.userId})
+        if(!courseDeleted){
+            res.status(404).send({message:'course not found'})
+        }else{ 
+            res.status(200).send({message: 'course deleted successfully'})
+        }
+    }catch(e){
+        console.log(e)
+        res.status(500).send({message: e.message})
+    }
+}
+
 module.exports = {
     saveCourse,
     getCourses,
     getCourseById,
-    updateCourseInfo
+    updateCourseInfo,
+    deleteCourse
 }
