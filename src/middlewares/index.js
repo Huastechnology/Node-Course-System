@@ -1,8 +1,11 @@
+const verifyCapacity = require('./VerifyCapacity');
+
 module.exports = {
   verifyEmptyFields: require('./verifyEmptyFields'),
   verifyDuplicatesEmails: require('./verifyDuplicatesEmails'),
   verifyRole: require('./verifyRole') ,
   verifyId: require('./verifyId'),
   verifyAuth: require('./verifyAuth'),
-  verifyUserAccess: require('./verifyUserAccess')
+  verifyUserAccess: require('./verifyUserAccess'),
+  verifyCapacity: require('./VerifyCapacity')
 }
