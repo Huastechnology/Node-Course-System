@@ -1,5 +1,3 @@
-const verifyCapacity = require('./VerifyCapacity');
-
 module.exports = {
   verifyEmptyFields: require('./verifyEmptyFields'),
   verifyDuplicatesEmails: require('./verifyDuplicatesEmails'),
