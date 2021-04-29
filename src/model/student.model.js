@@ -21,9 +21,12 @@ const Student = Schema({
         default: null
     },
     course: {
-        type: Array,
-        default: null
+        type: Schema.Types.ObjectId,
+        ref: "courses",
+        required: [true, 'Course id required!'],
+        autopopulate: true
     }
 })
 
+Student.plugin(require("mongoose-autopopulate"))
 module.exports = model('student', Student)
