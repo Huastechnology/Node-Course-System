@@ -7,12 +7,10 @@ const Course = Schema({
         required: [true, 'Course name required!']
     },
     teacher: {
-        type: String,
-        required: [true, 'Teacher name required!']
-    },
-    students: {
-        type: Array,
-        default: null
+        type: Schema.Types.ObjectId,
+        ref: "user",
+        required: [true, 'Teacher id required!'],
+        autopopulate: true
     },
     description: {
         type: String,
@@ -28,4 +26,5 @@ const Course = Schema({
     }
 })
 
+Course.plugin(require("mongoose-autopopulate"))
 module.exports = model('courses', Course)
