@@ -1,11 +1,13 @@
 const express = require('express')
 const app = express()
 const bp = require ('body-parser')
-const route = require('./routes/user.routes')
+const cors = require('cors')
+const apiSources= require('./routes')
 
 app.use(bp.urlencoded({extended:false}))
 app.use(bp.json())
+app.use(cors())
 
-app.use('/v2', route)
+app.use('/v2', apiSources)
 
 module.exports = app
