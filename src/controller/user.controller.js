@@ -48,7 +48,7 @@ async function logIn(req, res) {
       const token = generateToken(params)
       message = {message:'access success',token:token}
       status = 200 
-      res.status(status).send({message, rol: user.role, email: user.email, name: user.completeName})
+      res.status(status).send({message, rol: user.role, email: user.email, name: user.completeName, id: user._id})
     }
 
   } catch(err) {
