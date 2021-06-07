@@ -77,6 +77,16 @@ async function getMatchUser(req,res){
    }
 }
 
+async function getUserById(req,res){
+  try{
+    let id = req.params.userId
+    let user = await userSchema.find({_id:id},{password:false})
+    res.status(200).send({userData: user})
+  }catch(e){
+    res.status(500).send({message: e.message})
+  }
+}
+
 async function deleteUser (req, res) {
   try {
     let accountDeleted = await userSchema.findOneAndDelete({_id:req.params.userId})  
@@ -124,5 +134,6 @@ module.exports = {
   getMatchUser,
   logIn,
   deleteUser,
-  updateUserData
+  updateUserData,
+  getUserById
 }
