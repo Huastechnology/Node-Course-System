@@ -48,7 +48,7 @@ async function logIn(req, res) {
       const token = generateToken(params)
       message = {message:'access success',token:token}
       status = 200 
-      res.status(status).send({message, rol: user.role, email: user.email, name: user.completeName})
+      res.status(status).send({message, rol: user.role, email: user.email, name: user.completeName, id: user._id})
     }
 
   } catch(err) {
@@ -75,6 +75,16 @@ async function getMatchUser(req,res){
    } catch (e) {
      res.status(500).send({message: e.message})
    }
+}
+
+async function getUserById(req,res){
+  try{
+    let id = req.params.userId
+    let user = await userSchema.find({_id:id},{password:false})
+    res.status(200).send({userData: user})
+  }catch(e){
+    res.status(500).send({message: e.message})
+  }
 }
 
 async function deleteUser (req, res) {
@@ -124,5 +134,6 @@ module.exports = {
   getMatchUser,
   logIn,
   deleteUser,
-  updateUserData
+  updateUserData,
+  getUserById
 }

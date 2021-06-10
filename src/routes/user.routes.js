@@ -7,7 +7,8 @@ api.post('/user',middlewares.verifyRole, middlewares.verifyEmptyFields, middlewa
 api.post('/logIn', userController.logIn)
 api.get('/user', middlewares.verifyAuth, userController.getAllUsers)
 api.get('/user/:matchUser', middlewares.verifyAuth ,userController.getMatchUser)
+api.get('/user/id/:userId',middlewares.verifyAuth,userController.getUserById)
 api.delete('/user/:userId',middlewares.verifyRole ,userController.deleteUser)
-api.put('/user/:userId?', middlewares.verifyAuth ,middlewares.verifyId, middlewares.verifyUserAccess, middlewares.verifyDuplicatesEmails ,userController.updateUserData)
+api.put('/user/:userId?', middlewares.verifyAuth ,middlewares.verifyId, middlewares.verifyUserAccess ,userController.updateUserData)
 
 module.exports = api;
